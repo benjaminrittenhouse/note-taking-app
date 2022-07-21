@@ -13,6 +13,7 @@ export default function AppNavigation({ AppState }){
     return(
         <NavigationContainer>
             <Stack.Navigator>
+                
                 <Stack.Screen name = "AllNotes" options = {{headerShown: false}}>
                     {props => <AllNotes {...props} AppState={AppState} />}
                 </Stack.Screen>
@@ -22,8 +23,9 @@ export default function AppNavigation({ AppState }){
                 </Stack.Screen>
 
                 <Stack.Screen name = "CreateNote" options = {{headerShown: false}}>
-                    {props => <CreateNote {...props} AppState={AppState} />}
+                    {props => <CreateNote {...props} navigation = {navigation} AppState={AppState} />}
                 </Stack.Screen>
+                
             </Stack.Navigator>
         </NavigationContainer>
     );
