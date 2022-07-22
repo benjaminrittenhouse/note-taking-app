@@ -26,9 +26,11 @@ export default function CreateNote({ navigation, AppState }) {
 
     // save note in firestore
     async function createNote(noteTitle, noteDesc){
+        const d = new Date();
         await addDoc(collection(db, "users/"+auth.currentUser.uid+"/notes/"), {
             title: noteTitle,
-            desc: noteDesc
+            desc: noteDesc,
+            time: d.getTime()
           });
     }
 

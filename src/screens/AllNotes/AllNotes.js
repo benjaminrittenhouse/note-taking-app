@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import Constants from 'expo-constants'
 import GlobalFooter from '../../Footers/GlobalFooter'
 import GlobalHeader from '../../Headers/GlobalHeader'
@@ -50,8 +50,10 @@ export default function Home({ navigation, AppState }) {
         const notes = [];
         querySnapshot.forEach((doc) => {
             console.log(doc.data());
-            notes.push({noteTitle: doc.data().title, noteDesc: doc.data().desc});
+            notes.push({noteTitle: doc.data().title, noteDesc: doc.data().desc, noteTime: doc.data().time});
         });
+
+        notes.sort((a,b) => b.noteTime - a.noteTime);
 
         setAllNotes(notes)
     });
@@ -59,23 +61,25 @@ export default function Home({ navigation, AppState }) {
 
     return(
         <View style = {[styles.screen]}>
+            
             <GlobalHeader pageName="All Notes"/>
-            <View style={styles.body}>
-                {  allNotes.map((e, i) => {
-                    return(
-                        <TouchableOpacity 
-                            key = {i} 
-                            onPress={() => handlePress(e)}
-                            style={[styles.noteCont, styles.shadowProp]}
-                        >
+                <View style={styles.body}>
+                <ScrollView>
+                    {  allNotes.map((e, i) => {
+                        return(
+                            <TouchableOpacity 
+                                key = {i} 
+                                onPress={() => handlePress(e)}
+                                style={[styles.noteCont, styles.shadowProp]}
+                            >
 
-                            <Text>{ e.noteTitle }</Text>
+                                <Text>{ e.noteTitle }</Text>
 
-                        </TouchableOpacity>
-                    );
-                }) }
-            </View>
-
+                            </TouchableOpacity>
+                        );
+                    }) }
+                    </ScrollView>
+                </View>
             <GlobalFooter AppState={AppState} navigation = {navigation}/>
         </View>
         

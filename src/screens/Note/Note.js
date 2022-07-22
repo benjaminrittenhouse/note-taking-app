@@ -14,7 +14,7 @@ export default function Note({ navigation, AppState }) {
 
             <View style={styles.body}>
                 <Text>Note Title: { note.noteTitle }</Text>
-                <Text>Note Text: { note.noteText }</Text>
+                <Text>Note Text: { note.noteDesc }</Text>
             </View>
            
             <GlobalFooter AppState = {AppState} navigation = {navigation} />
