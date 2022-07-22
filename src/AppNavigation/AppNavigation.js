@@ -16,6 +16,10 @@ export default function AppNavigation({ AppState }){
         <NavigationContainer>
             <Stack.Navigator>
 
+                <Stack.Screen name = "Login" options = {{headerShown: false}}>
+                    {props => <Login {...props} AppState={AppState} />}
+                </Stack.Screen>
+
                 <Stack.Screen name = "Landing" options = {{headerShown: false}}>
                     {props => <Landing {...props} AppState={AppState} />}
                 </Stack.Screen>
@@ -24,9 +28,7 @@ export default function AppNavigation({ AppState }){
                     {props => <Register {...props} AppState={AppState} />}
                 </Stack.Screen>
 
-                <Stack.Screen name = "Login" options = {{headerShown: false}}>
-                    {props => <Login {...props} AppState={AppState} />}
-                </Stack.Screen>
+                
                 
                 <Stack.Screen name = "AllNotes" options = {{headerShown: false}}>
                     {props => <AllNotes {...props} AppState={AppState} />}

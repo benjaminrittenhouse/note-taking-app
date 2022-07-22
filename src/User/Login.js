@@ -27,20 +27,24 @@ export default function Login({ navigation, AppState }){
     }
 
     return(
-    <View>
+    <View style={styles.view}>
         <TextInput 
             style={styles.input}
-            placeholder="Email"
+            placeholder="email"
             onChangeText={text=>setUserEmail(text)}
-                />
+            labelFontSize={50}
+            fontSize={50}
+            />
         <TextInput 
             style={styles.input}
-            placeholder="Password"
+            placeholder="password"
             onChangeText={text=>setUserPassword(text)}
-        />
+            labelFontSize={50}
+            fontSize={50}
+            />
 
-        <TouchableOpacity onPress={() => login(auth, userEmail, userPassword)}>
-            <Text>Log In</Text>
+        <TouchableOpacity style={styles.button} onPress={() => login(auth, userEmail, userPassword)}>
+            <Text style={styles.login}>Login</Text>
         </TouchableOpacity>
 
         
@@ -49,8 +53,36 @@ export default function Login({ navigation, AppState }){
 }
 
 const styles = StyleSheet.create({
+    view: {
+        flex: 1,
+        alignContent: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     input: {
+        alignContent: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 1,
+        borderRadius: '33px',
+        fontsize: 50,
+        lineHeight: 40,
+        width: '50%',
+        margin: 20,
+        padding: 10,
+        paddingLeft: 20,
+    },
+    login: {
+        fontSize: 20,
+        margin: 15,
+        paddingLeft: 10,
+        paddingRight: 10,
+        fontWeight: 'bold',
+    },
+    button: {
         borderWidth: 3,
         borderRadius: '33px',
-    }
+        margin: 10,
+        marginTop: 20,
+    },
 })
