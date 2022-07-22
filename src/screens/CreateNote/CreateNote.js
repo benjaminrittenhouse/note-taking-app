@@ -24,12 +24,13 @@ export default function CreateNote({ navigation, AppState }) {
        return result;
     }
 
+    // save note in firestore
     async function createNote(noteTitle, noteDesc){
         await addDoc(collection(db, "users/"+auth.currentUser.uid+"/notes/"), {
             title: noteTitle,
             desc: noteDesc
           });
-}
+    }
 
     return(
         <View style = {styles.screen}>
