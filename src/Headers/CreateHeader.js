@@ -4,14 +4,14 @@ import {useRoute} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 
-export default function CreateHeader(props, { navigation, AppState }) {
+export default function CreateHeader({ navigation, AppState }) {
 
     return(
         <View style = {[styles.headerCont, styles.shadowProp]}>
-            <TouchableOpacity onPress = {() => navigation.goBack(null)} style={styles.iconButton}>
+            <TouchableOpacity onPress = {() => navigation.goBack()} style={styles.iconButton}>
                 <Icon style={ styles.icon }name="angle-left" size={40} color="black" />
             </TouchableOpacity>
-            <Text style={styles.hText}>{props.pageName}</Text>
+            <Text style={styles.hText}>Create new note</Text>
         </View>
         
     );
@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
-        height: '100%'
+        height: '100%',
+        color: 'red',
     },
     shadowProp: {
         shadowColor: '#171717',
@@ -37,6 +38,9 @@ const styles = StyleSheet.create({
     icon: {
         position: 'absolute',
         alignItems: 'center',
+    },
+    hText: {
+        fontColor: 'red',
     },
     iconButton: {
         height: '100%',
