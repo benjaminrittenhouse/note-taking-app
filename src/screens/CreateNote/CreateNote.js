@@ -4,26 +4,17 @@ import GlobalFooter from '../../Footers/GlobalFooter'
 import CreateHeader from '../../Headers/CreateHeader'
 import Constants from 'expo-constants'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { collection, addDoc, getFirestore, doc} from "firebase/firestore"; 
-
+import { collection, addDoc, getFirestore, setDoc, doc} from "firebase/firestore"; 
 import {db, auth} from '../../../firebase/firebase'
 
 
 export default function CreateNote({ navigation, AppState }) {
 
     async function createNote(noteTitle, noteDesc){
-        try {
-            //const usersCollection = collection(db, 'users')
-            const docRef = collection(db, "users")
-            await addDoc(collection(db, "notes"), {
-              title: noteTitle,
-              desc: noteDesc
-            });
-            console.log("Document written with ID: ", docRef.id);
-          } catch (e) {
-            console.error("Error adding document: ", e);
-          }
-          
+            await addDoc(doc(db, "users", auth.currentUser.uid, "notes"), {
+                title: noteTitle,
+                desc: noteDesc
+              });
     }
 
     const [noteTitle, setNoteTitle] = useState("");
