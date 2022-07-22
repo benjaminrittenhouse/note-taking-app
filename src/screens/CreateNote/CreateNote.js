@@ -10,15 +10,26 @@ import {db, auth} from '../../../firebase/firebase'
 
 export default function CreateNote({ navigation, AppState }) {
 
-    async function createNote(noteTitle, noteDesc){
-            await addDoc(doc(db, "users", auth.currentUser.uid, "notes"), {
-                title: noteTitle,
-                desc: noteDesc
-              });
-    }
-
     const [noteTitle, setNoteTitle] = useState("");
     const [noteDesc, setNoteDesc] = useState("");
+
+    function makeid(length) {
+        var result           = '';
+        var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < length; i++ ) {
+          result += characters.charAt(Math.floor(Math.random() * 
+         charactersLength));
+       }
+       return result;
+    }
+
+    async function createNote(noteTitle, noteDesc){
+        await addDoc(collection(db, "users/"+auth.currentUser.uid+"/notes/"), {
+            title: noteTitle,
+            desc: noteDesc
+          });
+}
 
     return(
         <View style = {styles.screen}>
