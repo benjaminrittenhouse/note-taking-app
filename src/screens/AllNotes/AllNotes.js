@@ -4,7 +4,7 @@ import Constants from 'expo-constants'
 import GlobalFooter from '../../Footers/GlobalFooter'
 import GlobalHeader from '../../Headers/GlobalHeader'
 import {db, auth} from '../../../firebase/firebase'
-import { doc, onSnapshot, getDoc, collection, getDocs } from "firebase/firestore";
+import { doc, onSnapshot, collection, getDocs, getDoc, query } from "firebase/firestore";
 
 export default function Home({ navigation, AppState }) {
     const { allNotes, setNote, setAllNotes } = AppState;
@@ -19,25 +19,42 @@ export default function Home({ navigation, AppState }) {
     // fetch user notes
     async function getData(){
         console.log("getting data...");
+        const locallist = [];
         const querySnapshot =  await getDocs(collection(db, "users/"+auth.currentUser.uid+"/notes/"));
         querySnapshot.forEach((doc) => {
-            allNotes.push({noteTitle: doc.data().title, noteText: doc.data().desc})
+            locallist.push({noteTitle: doc.data().title, noteText: doc.data().desc});
         //    console.log("setting " + doc.data().title)
         });
 
-        setAllNotes(allNotes);
+        setAllNotes(locallist);
         console.log("Notes List: " + allNotes);
+
+        //return = () => 
     }
     // load data when screen loads
     const onScreenLoad = () => {
-        setAllNotes(allNotes)
-        getData();
+        // setAllNotes(allNotes)
+       // getData();
+    }
+
+    async function test(){
+        console.log("users -> " + auth.currentUser.uid);
+        const docRef = collection(db, "users");
+        console.log(docRef)
     }
 
     // call via useEffect
     useEffect(() => {
-        // write your code here, it's like componentWillMount
-        onScreenLoad();
+        const q = query(collection(db, "users", auth.currentUser.uid, "notes"));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const notes = [];
+        querySnapshot.forEach((doc) => {
+            console.log(doc.data());
+            notes.push({noteTitle: doc.data().title, noteDesc: doc.data().desc});
+        });
+
+        setAllNotes(notes)
+    });
     }, [])
 
     return(
