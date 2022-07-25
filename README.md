@@ -1,4 +1,4 @@
-# Note Taking App
+# Noted - A Note Taking App
 Utilizing React Native in combination with Firestore from Google Firebase, this note taking app allows users to create accounts and log in, giving them access to notes stored in the cloud. Users can edit notes, create new ones, and delete notes that are no longer needed.
 (See video for demo of app. During the deleting portion, an off screen notification occurs which is why it appeared there was a delay. This is in web view, an alert pops up in iOS / android explaining to the user the note was deleted.)
 
