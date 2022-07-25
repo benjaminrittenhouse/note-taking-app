@@ -12,6 +12,7 @@ export default function CreateNote({ navigation, AppState }) {
 
     const [noteTitle, setNoteTitle] = useState("");
     const [noteDesc, setNoteDesc] = useState("");
+    const [height, setHeight] = useState(1);
 
     function makeid(length) {
         var result           = '';
@@ -34,6 +35,13 @@ export default function CreateNote({ navigation, AppState }) {
             time: d.getTime(),
             id: rnd
           });
+
+          navigation.navigate("AllNotes")
+    }
+
+    // change lineheight onchange
+    async function updateDesc(event){
+        // somehow know we are over chars per line
     }
 
     return(
@@ -44,11 +52,14 @@ export default function CreateNote({ navigation, AppState }) {
                     style={styles.titleInput}
                     onChangeText={text=>setNoteTitle(text)}
                     placeholder="Note Title..."
+                    multiline={true}
                 />
                 <TextInput 
                     style={styles.descInput}
                     onChangeText={text=>setNoteDesc(text)}
                     placeholder="Note details..."
+                    multiline={true}
+                    numberOfLines={22}
                 />
 
             <TouchableOpacity style={styles.plus} onPress = {() => createNote(noteTitle, noteDesc)}>
@@ -80,8 +91,8 @@ const styles = StyleSheet.create({
         marginLeft: 10,
     }, 
     descInput: {
-        marginTop: 10,
-        marginLeft: 10,
+        paddingTop: 10,
+        paddingLeft: 10,
     },
     header: {
         fontSize: 50,
