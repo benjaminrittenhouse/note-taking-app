@@ -1,6 +1,6 @@
 # Note Taking App
-(See video for demo of app)
 Utilizing React Native in combination with Firestore from Google Firebase, this note taking app allows users to create accounts and log in, giving them access to notes stored in the cloud. Users can edit notes, create new ones, and delete notes that are no longer needed.
+(See video for demo of app. During the deleting portion, an off screen notification occurs which is why it appeared there was a delay. This is in web view, an alert pops up in iOS / android explaining to the user the note was deleted.)
 
 # onChange
 The React Native feature "onChange" was very useful when creating this project. Every time someone edits the text input on a note, Firebase stores this change immediately. This way, if there is any sort of crash or the user accidentally exits a note while still trying to edit, the most recent edit will have been saved. Even if you don't click the "check mark" at the bottom of the createNote screen.
