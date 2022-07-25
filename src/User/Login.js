@@ -96,7 +96,6 @@ const styles = StyleSheet.create({
         fontSize: 25,
         marginBottom: 10,
     },
-
     have: {
         margin: 10,
         marginTop: 20,

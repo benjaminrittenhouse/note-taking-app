@@ -11,46 +11,20 @@ export default function Home({ navigation, AppState }) {
 
     const handlePress = (element) => {
         // set the value of note to whatever they click on
+        console.log("element: " + element);
         setNote(element);
         // go to note screen
         navigation.navigate('Note');
     }
 
     // fetch user notes
-    async function getData(){
-        console.log("getting data...");
-        const locallist = [];
-        const querySnapshot =  await getDocs(collection(db, "users/"+auth.currentUser.uid+"/notes/"));
-        querySnapshot.forEach((doc) => {
-            locallist.push({noteTitle: doc.data().title, noteText: doc.data().desc});
-        //    console.log("setting " + doc.data().title)
-        });
-
-        setAllNotes(locallist);
-        console.log("Notes List: " + allNotes);
-
-        //return = () => 
-    }
-    // load data when screen loads
-    const onScreenLoad = () => {
-        // setAllNotes(allNotes)
-       // getData();
-    }
-
-    async function test(){
-        console.log("users -> " + auth.currentUser.uid);
-        const docRef = collection(db, "users");
-        console.log(docRef)
-    }
-
     // call via useEffect
     useEffect(() => {
         const q = query(collection(db, "users", auth.currentUser.uid, "notes"));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const notes = [];
         querySnapshot.forEach((doc) => {
-            console.log(doc.data());
-            notes.push({noteTitle: doc.data().title, noteDesc: doc.data().desc, noteTime: doc.data().time});
+            notes.push({noteTitle: doc.data().title, noteDesc: doc.data().desc, noteTime: doc.data().time, id: doc.data().id});
         });
 
         notes.sort((a,b) => b.noteTime - a.noteTime);
