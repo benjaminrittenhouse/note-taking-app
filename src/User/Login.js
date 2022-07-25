@@ -28,6 +28,9 @@ export default function Login({ navigation, AppState }){
 
     return(
     <View style={styles.view}>
+        <Text style={styles.text}>
+            Who are you?
+        </Text>
         <TextInput 
             style={styles.input}
             placeholder="email"
@@ -41,10 +44,14 @@ export default function Login({ navigation, AppState }){
             onChangeText={text=>setUserPassword(text)}
             labelFontSize={50}
             fontSize={50}
+            secureTextEntry={true}
             />
 
         <TouchableOpacity style={styles.button} onPress={() => login(auth, userEmail, userPassword)}>
             <Text style={styles.login}>Login</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.have} onPress={() => navigation.navigate("Register")}>
+                <Text style={styles.haveText}>Don't have an account? Click here</Text>
         </TouchableOpacity>
 
         
@@ -85,4 +92,17 @@ const styles = StyleSheet.create({
         margin: 10,
         marginTop: 20,
     },
+    text: {
+        fontSize: 25,
+        marginBottom: 10,
+    },
+
+    have: {
+        margin: 10,
+        marginTop: 20,
+    }, 
+    haveText: {
+        fontSize: 15,
+        color: '#3486eb',
+    }
 })
